@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState, useEffect } from "react";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 
-function App() {
+import { fetchAll } from "./store/actions";
+import MainCountries from "./pages/mainCountries";
+import ChoiceCountries from "./pages/choiceCountries";
+import HeaderCountries from "./components/headerCountries";
+import { useTypeDispatch } from "./hooks/redux";
+
+import { Global, Content } from "./styles/appStyle";
+
+const App: FC = () => {
+  const dispatch = useTypeDispatch();
+  const [theme, setTheme] = useState<boolean>(true);
+
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Global />
+      <Content theme={theme}>
+        <HeaderCountries setTheme={setTheme} theme={theme} />
+
+        <Routes>
+          <Route path="/" element={<MainCountries />} />
+          <Route path="/:id" element={<ChoiceCountries />} />
+        </Routes>
+      </Content>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

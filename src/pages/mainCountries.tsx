@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 import chunk from "chunk";
 import sortBy from "lodash.sortby";
 import { useDebounce } from "use-debounce";
@@ -23,7 +23,7 @@ const MainCountries: FC = () => {
   const [sortnOption, setSortOption] = useState<IOption | null>(null);
 
   const [value] = useDebounce(search, 1000);
-  //
+
   //сортировка массива
   const sortItems = (array: IItem[], sortnOption: IOption | null) => {
     if (sortnOption) {
@@ -94,7 +94,9 @@ const MainCountries: FC = () => {
           : (items.length &&
               chunk(sortItems(items, sortnOption), 8)[page].map(
                 (item: IItem) => {
-                  return renderCountry(item);
+                  console.log(item.borders);
+
+                  return renderCountry(item, sortnOption);
                 }
               )) ||
             "loading"}
@@ -106,14 +108,30 @@ const MainCountries: FC = () => {
 
 export default MainCountries;
 
-const renderCountry = (item: IItem) => {
+const borderLength = (borders: string[]) => {
+  return <i>{borders.length}</i>;
+};
+
+const renderCountry = (item: IItem, sortnOption: IOption | null) => {
   return (
     <Country key={item.area}>
       <img src={item.flags.svg} alt={item.name.common} />
       <div>
         <h5>{item.name.common}</h5>
         <p>
-          <strong>Population:</strong> {item.population}
+          <strong>
+            {sortnOption && sortnOption.value === "area"
+              ? "Area"
+              : sortnOption && sortnOption.value === "bordering"
+              ? "Bordering Countries"
+              : "Population"}
+            :
+          </strong>{" "}
+          {sortnOption && sortnOption.value === "area"
+            ? item.area
+            : sortnOption && sortnOption.value === "bordering"
+            ? borderLength(item.borders)
+            : item.population}
         </p>
         <p>
           <strong>Region:</strong> {item.region}

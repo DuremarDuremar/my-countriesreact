@@ -47,6 +47,9 @@ export const Country = styled.article`
     height: 120px;
     object-fit: cover;
   }
+  i {
+    color: red;
+  }
 `;
 
 export const SelectWrapper = styled.div`

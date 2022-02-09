@@ -8,7 +8,8 @@ import SearchCountries from "../components/searchCountries";
 import RegionCountries from "../components/regionCountries";
 import SortCountries from "../components/sortCoutries";
 import PaginationCountries from "../components/paginationCountries";
-import { Content, Options, Container, Country } from "../styles/mainStyle";
+import ItemCountries from "../components/itemCountries";
+import { Content, Options, Container } from "../styles/mainStyle";
 import { IItem, IOption } from "../types";
 
 import { useTypeSelector } from "../hooks/redux";
@@ -42,18 +43,6 @@ const MainCountries: FC = () => {
       return array;
     }
   };
-
-  // if (items.length) {
-  //   console.log(sortBy(items, ["population"]).reverse());
-  //   console.log(sortBy(items, ["area"]).reverse());
-  //   console.log(
-  //     sortBy(items, [
-  //       function (item) {
-  //         return item.borders.length;
-  //       },
-  //     ]).reverse()
-  //   );
-  // }
 
   // фильтрация массива
   useEffect(() => {
@@ -94,9 +83,15 @@ const MainCountries: FC = () => {
           : (items.length &&
               chunk(sortItems(items, sortnOption), 8)[page].map(
                 (item: IItem) => {
-                  console.log(item.borders);
+                  console.log(item);
 
-                  return renderCountry(item, sortnOption);
+                  return (
+                    <ItemCountries
+                      item={item}
+                      sortnOption={sortnOption}
+                      key={item.name.common}
+                    />
+                  );
                 }
               )) ||
             "loading"}
@@ -107,42 +102,6 @@ const MainCountries: FC = () => {
 };
 
 export default MainCountries;
-
-const borderLength = (borders: string[]) => {
-  return <i>{borders.length}</i>;
-};
-
-const renderCountry = (item: IItem, sortnOption: IOption | null) => {
-  return (
-    <Country key={item.area}>
-      <img src={item.flags.svg} alt={item.name.common} />
-      <div>
-        <h5>{item.name.common}</h5>
-        <p>
-          <strong>
-            {sortnOption && sortnOption.value === "area"
-              ? "Area"
-              : sortnOption && sortnOption.value === "bordering"
-              ? "Bordering Countries"
-              : "Population"}
-            :
-          </strong>{" "}
-          {sortnOption && sortnOption.value === "area"
-            ? item.area
-            : sortnOption && sortnOption.value === "bordering"
-            ? borderLength(item.borders)
-            : item.population}
-        </p>
-        <p>
-          <strong>Region:</strong> {item.region}
-        </p>
-        <p>
-          <strong>Capital:</strong> {item.capital || "..."}
-        </p>
-      </div>
-    </Country>
-  );
-};
 
 // items.length &&
 //           chunk(Array.from([...new Array(items.length)].keys()), 8)[0].map(

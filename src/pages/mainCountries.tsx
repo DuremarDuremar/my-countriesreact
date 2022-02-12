@@ -83,8 +83,6 @@ const MainCountries: FC = () => {
           : (items.length &&
               chunk(sortItems(items, sortnOption), 8)[page].map(
                 (item: IItem) => {
-                  console.log(item);
-
                   return (
                     <ItemCountries
                       item={item}

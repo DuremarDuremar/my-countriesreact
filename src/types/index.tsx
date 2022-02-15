@@ -11,6 +11,7 @@ export interface IItem {
     svg: string;
   };
   borders: string[];
+  cioc: string;
 }
 
 export interface IOption {

@@ -1,17 +1,15 @@
-import {
-  createAction,
-  createReducer,
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface DefaultState {
+import { IItem } from "../types";
+
+/////////////////////////////////////////////////
+interface AllState {
   loading: boolean;
-  data: any[];
+  data: IItem[] | [];
   error: string;
 }
 
-const initialState: DefaultState = {
+const initialStateAll: AllState = {
   loading: false,
   data: [],
   error: "",
@@ -19,7 +17,7 @@ const initialState: DefaultState = {
 
 export const allSlice = createSlice({
   name: "all",
-  initialState,
+  initialState: initialStateAll,
   reducers: {
     allFetching(state) {
       state.loading = true;
@@ -36,4 +34,39 @@ export const allSlice = createSlice({
   },
 });
 
+////////////////////////////////////////////////
+
+interface NameState {
+  loading: boolean;
+  data: any;
+  error: string;
+}
+
+const initialStateName: NameState = {
+  loading: false,
+  data: null,
+  error: "",
+};
+
+export const nameSlice = createSlice({
+  name: "name",
+  initialState: initialStateName,
+  reducers: {
+    nameFetching(state) {
+      state.loading = true;
+    },
+    nameFetchingSuccess(state, action: PayloadAction<any>) {
+      state.loading = false;
+      state.data = action.payload;
+      state.error = "";
+    },
+    nameFetchingError(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+  },
+});
+
+/////////////////////////////////////////////
 export const allReducer = allSlice.reducer;
+export const nameReducer = nameSlice.reducer;

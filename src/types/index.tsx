@@ -12,6 +12,7 @@ export interface IItem {
   };
   borders: string[];
   cioc: string;
+  cca3: string;
 }
 
 export interface IOption {

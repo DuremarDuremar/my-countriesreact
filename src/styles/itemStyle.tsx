@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Country = styled.article`
   width: 208px;
@@ -42,3 +43,5 @@ export const BordersWrapper = styled.p<{
   display: inline;
   color: ${(props) => props.red === true && "red"};
 `;
+
+export const LinkWrapper = styled(Link)``;

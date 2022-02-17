@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
-import { fetchAll, fetchName } from "./store/actions";
+import { fetchAll } from "./store/actions";
 import MainCountries from "./pages/mainCountries";
 import ChoiceCountries from "./pages/choiceCountries";
 import HeaderCountries from "./components/headerCountries";
@@ -15,7 +15,6 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(fetchAll());
-    dispatch(fetchName());
   }, [dispatch]);
 
   return (

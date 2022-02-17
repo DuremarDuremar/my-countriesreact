@@ -58,7 +58,7 @@ export const nameSlice = createSlice({
     nameFetchingSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.data = action.payload;
-      state.error = "";
+      state.error = "No";
     },
     nameFetchingError(state, action: PayloadAction<string>) {
       state.loading = false;

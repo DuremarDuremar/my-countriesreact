@@ -16,11 +16,11 @@ export const fetchAll = () => async (dispatch: TypeDispatch) => {
   }
 };
 
-export const fetchName = () => async (dispatch: TypeDispatch) => {
+export const fetchName = (id: string) => async (dispatch: TypeDispatch) => {
   try {
     dispatch(nameSlice.actions.nameFetching());
     const res = await axios.get<any>(
-      "https://restcountries.com/v3.1/alpha?codes=UMI"
+      `https://restcountries.com/v3.1/alpha?codes=${id}`
     );
 
     dispatch(nameSlice.actions.nameFetchingSuccess(res.data));

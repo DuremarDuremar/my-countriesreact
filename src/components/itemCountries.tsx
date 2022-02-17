@@ -13,7 +13,13 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
 
   const borderLength = (borders: string[]) => {
     return borders.length > 6 ? (
-      <BordersWrapper red={scan} onClick={() => setScan(!scan)}>
+      <BordersWrapper
+        red={scan}
+        onClick={(e) => {
+          setScan(!scan);
+          e.preventDefault();
+        }}
+      >
         {borders.length}
         <i> ...</i>
       </BordersWrapper>
@@ -22,7 +28,12 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
         {borders.length > 1 ? <br /> : null}
         {borders.length
           ? borders.map((item, index) => {
-              return <span key={index}> {item}</span>;
+              return (
+                <span key={index} onClick={(e) => e.preventDefault()}>
+                  {" "}
+                  {item}
+                </span>
+              );
             })
           : "..."}
       </>
@@ -35,7 +46,7 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
         <img src={item.flags.svg} alt={item.name.common} />
         <div>
           <h5>{item.name.common}</h5>
-          <h6 onClick={(e) => e.preventDefault()}>
+          <h6>
             <strong>
               {sortnOption && sortnOption.value === "area"
                 ? "Area"

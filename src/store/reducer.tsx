@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IItem } from "../types";
+import { IItem, IName } from "../types";
 
 /////////////////////////////////////////////////
 interface AllState {
@@ -22,7 +22,7 @@ export const allSlice = createSlice({
     allFetching(state) {
       state.loading = true;
     },
-    allFetchingSuccess(state, action: PayloadAction<any[]>) {
+    allFetchingSuccess(state, action: PayloadAction<IItem[]>) {
       state.loading = false;
       state.data = action.payload;
       state.error = "";
@@ -38,13 +38,13 @@ export const allSlice = createSlice({
 
 interface NameState {
   loading: boolean;
-  data: any;
+  data: IName[] | [];
   error: string;
 }
 
 const initialStateName: NameState = {
   loading: false,
-  data: null,
+  data: [],
   error: "",
 };
 
@@ -55,10 +55,10 @@ export const nameSlice = createSlice({
     nameFetching(state) {
       state.loading = true;
     },
-    nameFetchingSuccess(state, action: PayloadAction<any>) {
+    nameFetchingSuccess(state, action: PayloadAction<IName[]>) {
       state.loading = false;
       state.data = action.payload;
-      state.error = "No";
+      state.error = "";
     },
     nameFetchingError(state, action: PayloadAction<string>) {
       state.loading = false;

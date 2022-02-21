@@ -1,7 +1,7 @@
 import { TypeDispatch } from "./store";
 import axios from "axios";
 import { allSlice, nameSlice } from "./reducer";
-import { IItem } from "../types";
+import { IItem, IName } from "../types";
 
 export const fetchAll = () => async (dispatch: TypeDispatch) => {
   try {
@@ -19,7 +19,7 @@ export const fetchAll = () => async (dispatch: TypeDispatch) => {
 export const fetchName = (id: string) => async (dispatch: TypeDispatch) => {
   try {
     dispatch(nameSlice.actions.nameFetching());
-    const res = await axios.get<any>(
+    const res = await axios.get<IName[]>(
       `https://restcountries.com/v3.1/alpha?codes=${id}`
     );
 

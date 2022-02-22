@@ -44,14 +44,46 @@ const ChoiceCountries: FC = () => {
       ) : (
         <>
           <Flag>
-            <Back></Back>
+            <Back>
+              <i className="fas fa-long-arrow-alt-left"></i>
+              <span> Back</span>
+            </Back>
             <div>
               {state && <img src={state.flags.png} alt={state.name.common} />}
             </div>
           </Flag>
           <Card>
-            <Name></Name>
-            <Info></Info>
+            <Name>{state && state.name.common}</Name>
+            <Info>
+              {state && (
+                <>
+                  <li>
+                    <strong>Native Name</strong>
+                  </li>
+                  <li>
+                    <strong>Population</strong>
+                  </li>
+                  <li>
+                    <strong>Region</strong>
+                  </li>
+                  <li>
+                    <strong>Sub Region</strong>
+                  </li>
+                  <li>
+                    <strong>Capital</strong>
+                  </li>
+                  <li>
+                    <strong>Top Level Domain</strong>
+                  </li>
+                  <li>
+                    <strong>Currencies</strong>
+                  </li>
+                  <li>
+                    <strong>Languages</strong>
+                  </li>
+                </>
+              )}
+            </Info>
             <Borders></Borders>
           </Card>
         </>

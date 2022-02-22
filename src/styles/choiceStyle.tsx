@@ -12,14 +12,10 @@ export const Flag = styled.section`
   border-right: 1px solid #fff;
   flex-direction: column;
   display: flex;
-  justify-content: start;
-  align-items: center;
-  padding: 0 25px 0 10px;
+  padding: 0 15px 0 4vw;
   div {
-    width: 100%;
     display: flex;
-    justify-content: center;
-    margin-top: 20%;
+    margin-top: 10%;
   }
   img {
     box-shadow: rgba(0, 0, 0, 0.4) 5px 5px, rgba(0, 0, 0, 0.3) 10px 10px,
@@ -28,24 +24,35 @@ export const Flag = styled.section`
     display: block;
     max-width: 440px;
     max-height: 300px;
-    background-size: cover;
     width: 100%;
   }
 `;
 
 export const Back = styled.button`
-  display: block;
-  width: 50px;
-  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 25px;
+  margin-top: 10%;
+
+  span {
+    font-size: 11px;
+    padding-left: 7px;
+  }
+  :hover {
+    box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.5),
+      inset 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
+  }
 `;
 
 export const Card = styled.section`
   flex: 0 0 50%;
-  padding: 0 10px 0 25px;
+  padding: 0 4vw 0 15px;
 `;
 
 export const Name = styled.div``;
 
-export const Info = styled.div``;
+export const Info = styled.ul``;
 
 export const Borders = styled.div``;

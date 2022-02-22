@@ -77,6 +77,14 @@ export const Content = styled.div<{
     transition: all 0.9s ease-in-out;
   }
 
+  button {
+    background-color: ${(props) =>
+      props.theme === true ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
+    color: ${(props) =>
+      props.theme === true ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)"};
+    transition: all 0.9s ease-in-out;
+  }
+
   .Select__control {
     background-color: ${(props) =>
       props.theme === true ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};

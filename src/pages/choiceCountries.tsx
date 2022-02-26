@@ -46,9 +46,11 @@ const ChoiceCountries: FC = () => {
       ) : (
         <>
           <Flag>
-            <Back>
-              <i className="fas fa-long-arrow-alt-left"></i>
-              <span> Back</span>
+            <Back to={`/`}>
+              <button>
+                <i className="fas fa-long-arrow-alt-left"></i>
+                <span> Back</span>
+              </button>
             </Back>
             <div>
               {state && <img src={state.flags.png} alt={state.name.common} />}
@@ -60,32 +62,32 @@ const ChoiceCountries: FC = () => {
               {state && (
                 <>
                   <li>
-                    <strong>Native Name</strong>{" "}
+                    <strong>Native Name</strong>:{" "}
                     {state &&
                       state.name.nativeName[
                         Object.keys(state.name.nativeName)[0]
                       ].common}
                   </li>
                   <li>
-                    <strong>Top Level Domain</strong> {state && state.tld[0]}
+                    <strong>Top Level Domain</strong>: {state && state.tld[0]}
                   </li>
                   <li>
-                    <strong>Population</strong> {state && state.population}
+                    <strong>Population</strong>: {state && state.population}
                   </li>
                   <li>
-                    <strong>Currencies</strong>{" "}
+                    <strong>Currencies</strong>:{" "}
                     {state &&
                       state.currencies[Object.keys(state.currencies)[0]].name}
                   </li>
                   <li>
-                    <strong>Region</strong> {state && state.region}
+                    <strong>Region</strong>: {state && state.region}
                   </li>
                   <li className="tttf">
-                    <strong>Languages</strong>{" "}
+                    <strong>Languages</strong>:{" "}
                     {state && Object.values(state.languages)[0]}
                   </li>
                   <li>
-                    <strong>Sub Region</strong> {state && state.subregion}
+                    <strong>Sub Region</strong>: {state && state.subregion}
                   </li>
                   <li>
                     <strong>Capital</strong> {state && state.capital}

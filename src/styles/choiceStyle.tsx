@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Content = styled.div`
   display: flex;
@@ -28,21 +29,26 @@ export const Flag = styled.section`
   }
 `;
 
-export const Back = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const Back = styled(Link)`
   width: 90px;
   height: 25px;
   margin-top: 7%;
+  button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    :hover {
+      box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.5),
+        inset 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
+    }
+  }
 
   span {
     font-size: 11px;
     padding-left: 7px;
-  }
-  :hover {
-    box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.5),
-      inset 3px 3px 3px 0 rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -51,13 +57,15 @@ export const Card = styled.section`
   padding: 0 4vw 0 15px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 `;
 
-export const Name = styled.div``;
+export const Name = styled.div`
+  align-self: start;
+`;
 
 export const Info = styled.ul`
+  padding-top: 30px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;

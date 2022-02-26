@@ -15,7 +15,7 @@ export const Flag = styled.section`
   padding: 0 15px 0 4vw;
   div {
     display: flex;
-    margin-top: 10%;
+    margin-top: 7%;
   }
   img {
     box-shadow: rgba(0, 0, 0, 0.4) 5px 5px, rgba(0, 0, 0, 0.3) 10px 10px,
@@ -34,7 +34,7 @@ export const Back = styled.button`
   align-items: center;
   width: 90px;
   height: 25px;
-  margin-top: 10%;
+  margin-top: 7%;
 
   span {
     font-size: 11px;

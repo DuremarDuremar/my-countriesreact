@@ -37,6 +37,10 @@ const ChoiceCountries: FC = () => {
     }
   }, [data]);
 
+  console.log(
+    state && state.name.nativeName[Object.keys(state.name.nativeName)[0]].common
+  );
+
   return (
     <Content>
       {loading ? (
@@ -58,25 +62,31 @@ const ChoiceCountries: FC = () => {
               {state && (
                 <>
                   <li>
-                    <strong>Native Name</strong>
+                    <strong>Native Name</strong>{" "}
+                    {state &&
+                      state.name.nativeName[
+                        Object.keys(state.name.nativeName)[0]
+                      ].common}
                   </li>
                   <li>
-                    <strong>Population</strong>
+                    <strong>Population</strong> {state && state.population}
                   </li>
                   <li>
-                    <strong>Region</strong>
+                    <strong>Region</strong> {state && state.region}
                   </li>
                   <li>
-                    <strong>Sub Region</strong>
+                    <strong>Sub Region</strong> {state && state.subregion}
                   </li>
                   <li>
-                    <strong>Capital</strong>
+                    <strong>Capital</strong> {state && state.capital}
                   </li>
                   <li>
-                    <strong>Top Level Domain</strong>
+                    <strong>Top Level Domain</strong> {state && state.tld[0]}
                   </li>
                   <li>
-                    <strong>Currencies</strong>
+                    <strong>Currencies</strong>{" "}
+                    {state &&
+                      state.currencies[Object.keys(state.currencies)[0]].name}
                   </li>
                   <li>
                     <strong>Languages</strong>

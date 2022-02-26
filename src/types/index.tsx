@@ -24,7 +24,7 @@ export interface IName {
   name: {
     common: string;
     nativeName: {
-      ara: {
+      [propName: string]: {
         common: string;
       };
     };

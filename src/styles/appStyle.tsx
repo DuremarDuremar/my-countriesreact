@@ -63,7 +63,7 @@ export const Content = styled.div<{
     transition: all 0.9s ease-in-out;
   }
 
-  ul {
+  div > ul {
     background-color: ${(props) =>
       props.theme === true ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
     transition: all 0.9s ease-in-out;

@@ -37,9 +37,7 @@ const ChoiceCountries: FC = () => {
     }
   }, [data]);
 
-  console.log(
-    state && state.name.nativeName[Object.keys(state.name.nativeName)[0]].common
-  );
+  console.log(state && Object.values(state.languages)[0]);
 
   return (
     <Content>
@@ -69,19 +67,10 @@ const ChoiceCountries: FC = () => {
                       ].common}
                   </li>
                   <li>
-                    <strong>Population</strong> {state && state.population}
-                  </li>
-                  <li>
-                    <strong>Region</strong> {state && state.region}
-                  </li>
-                  <li>
-                    <strong>Sub Region</strong> {state && state.subregion}
-                  </li>
-                  <li>
-                    <strong>Capital</strong> {state && state.capital}
-                  </li>
-                  <li>
                     <strong>Top Level Domain</strong> {state && state.tld[0]}
+                  </li>
+                  <li>
+                    <strong>Population</strong> {state && state.population}
                   </li>
                   <li>
                     <strong>Currencies</strong>{" "}
@@ -89,7 +78,17 @@ const ChoiceCountries: FC = () => {
                       state.currencies[Object.keys(state.currencies)[0]].name}
                   </li>
                   <li>
-                    <strong>Languages</strong>
+                    <strong>Region</strong> {state && state.region}
+                  </li>
+                  <li className="tttf">
+                    <strong>Languages</strong>{" "}
+                    {state && Object.values(state.languages)[0]}
+                  </li>
+                  <li>
+                    <strong>Sub Region</strong> {state && state.subregion}
+                  </li>
+                  <li>
+                    <strong>Capital</strong> {state && state.capital}
                   </li>
                 </>
               )}

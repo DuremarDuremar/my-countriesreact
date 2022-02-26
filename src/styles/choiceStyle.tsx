@@ -49,10 +49,22 @@ export const Back = styled.button`
 export const Card = styled.section`
   flex: 0 0 50%;
   padding: 0 4vw 0 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Name = styled.div``;
 
-export const Info = styled.ul``;
+export const Info = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+
+  li:nth-child(6) {
+    grid-row: span 3 / auto;
+  }
+`;
 
 export const Borders = styled.div``;

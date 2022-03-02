@@ -11,6 +11,7 @@ import {
   Info,
   Name,
   Borders,
+  BorderLink,
 } from "../styles/choiceStyle";
 import { useTypeSelector } from "../hooks/redux";
 import { IName } from "../types";
@@ -22,8 +23,8 @@ const ChoiceCountries: FC = () => {
 
   const [state, setState] = useState<IName | null>(null);
 
-  console.log(data);
-  console.log(state);
+  // console.log(data);
+  // console.log(state);
 
   const dispatch = useTypeDispatch();
 
@@ -37,7 +38,7 @@ const ChoiceCountries: FC = () => {
     }
   }, [data]);
 
-  console.log(state && Object.values(state.languages)[0]);
+  // console.log(state && Object.values(state.languages)[0]);
 
   return (
     <Content>
@@ -95,7 +96,21 @@ const ChoiceCountries: FC = () => {
                 </>
               )}
             </Info>
-            <Borders></Borders>
+            <Borders>
+              <div>
+                <strong>Border Countries</strong>:
+              </div>
+              <div>
+                {state &&
+                  state.borders.map((item, index) => {
+                    return (
+                      <BorderLink key={index} to={`/${item}`}>
+                        <button>{item}</button>
+                      </BorderLink>
+                    );
+                  })}
+              </div>
+            </Borders>
           </Card>
         </>
       )}

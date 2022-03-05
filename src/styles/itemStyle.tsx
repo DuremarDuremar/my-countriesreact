@@ -6,7 +6,7 @@ export const Country = styled.article`
   cursor: pointer;
   margin: 0px auto;
   position: relative;
-  height: 225px;
+  min-height: 225px;
   padding: 5px 0 7px;
 
   :hover {

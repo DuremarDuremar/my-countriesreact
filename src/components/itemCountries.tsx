@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 
 import { IItem, IOption } from "../types";
 import { Country, BordersWrapper, LinkWrapper } from "../styles/itemStyle";
+import { useTypeSelector } from "../hooks/redux";
 
 interface IProps {
   item: IItem;
@@ -9,10 +10,20 @@ interface IProps {
 }
 
 const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
+  const { data } = useTypeSelector((state) => state.allReducer);
+
   const [scan, setScan] = useState(true);
 
+  const borderSearch = (br: string) => {
+    return data
+      .filter((item) => {
+        return item.cca3 === br ? item.name.common : null;
+      })
+      .map((item) => item.name.common);
+  };
+
   const borderLength = (borders: string[]) => {
-    return borders.length > 6 ? (
+    return borders.length > 2 ? (
       <BordersWrapper
         red={scan}
         onClick={(e) => {
@@ -31,7 +42,7 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
               return (
                 <span key={index} onClick={(e) => e.preventDefault()}>
                   {" "}
-                  {item}
+                  {borderSearch(item)}
                 </span>
               );
             })
@@ -64,7 +75,7 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
           {!scan ? (
             <h6 onClick={(e) => e.preventDefault()}>
               {item.borders.map((item, index) => {
-                return <span key={index}> {item}</span>;
+                return <span key={index}> {borderSearch(item)}</span>;
               })}
             </h6>
           ) : (

@@ -33,7 +33,7 @@ export const Content = styled.div<{
   theme: boolean;
 }>`
   max-width: 1366px;
-  height: 100vh;
+  min-height: 100vh;
 
   margin: 0px auto;
   font-family: "Nunito Sans", sans-serif;

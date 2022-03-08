@@ -1,5 +1,6 @@
-import { TypeDispatch } from "./store";
 import axios from "axios";
+
+import { TypeDispatch } from "./store";
 import { allSlice, nameSlice } from "./reducer";
 import { IItem, IName } from "../types";
 

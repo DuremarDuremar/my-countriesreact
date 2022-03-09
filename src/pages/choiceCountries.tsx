@@ -21,10 +21,19 @@ const ChoiceCountries: FC = () => {
 
   const { data, loading } = useTypeSelector((state) => state.nameReducer);
 
+  const array = useTypeSelector((state) => state.allReducer.data);
+
   const [state, setState] = useState<IName | null>(null);
 
-  // console.log(data);
-  // console.log(state);
+  console.log(array);
+  console.log(state);
+
+  // if (array && state) {
+  //   let gg = array.filter((item) => {
+  //     return state.borders.includes(item.cca3);
+  //   });
+  //   console.log("gg", gg);
+  // }
 
   const dispatch = useTypeDispatch();
 
@@ -38,7 +47,13 @@ const ChoiceCountries: FC = () => {
     }
   }, [data]);
 
-  // console.log(state && Object.values(state.languages)[0]);
+  const arrayFilter =
+    state &&
+    array.filter((item) => {
+      return state.borders ? state.borders.includes(item.cca3) : null;
+    });
+
+  console.log(arrayFilter);
 
   return (
     <Content>
@@ -83,7 +98,7 @@ const ChoiceCountries: FC = () => {
                   <li>
                     <strong>Region</strong>: {state && state.region}
                   </li>
-                  <li className="tttf">
+                  <li>
                     <strong>Languages</strong>:{" "}
                     {state && Object.values(state.languages)[0]}
                   </li>
@@ -101,14 +116,21 @@ const ChoiceCountries: FC = () => {
                 <strong>Border Countries</strong>:
               </div>
               <div>
-                {state &&
+                {/* {state &&
                   state.borders.map((item, index) => {
                     return (
                       <BorderLink key={index} to={`/${item}`}>
                         <button>{item}</button>
                       </BorderLink>
                     );
-                  })}
+                  })} */}
+                {state &&
+                  arrayFilter &&
+                  arrayFilter.map((item, index) => (
+                    <BorderLink key={index} to={`/${item.cca3}`}>
+                      <button>{item.name.common}</button>
+                    </BorderLink>
+                  ))}
               </div>
             </Borders>
           </Card>

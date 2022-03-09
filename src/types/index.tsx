@@ -49,5 +49,5 @@ export interface IName {
   tld: {
     [propName: number]: string;
   };
-  borders: string[];
+  borders?: string[];
 }

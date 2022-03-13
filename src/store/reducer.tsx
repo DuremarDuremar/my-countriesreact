@@ -54,6 +54,7 @@ export const nameSlice = createSlice({
   reducers: {
     nameFetching(state) {
       state.loading = true;
+      state.data = [];
     },
     nameFetchingSuccess(state, action: PayloadAction<IName[]>) {
       state.loading = false;

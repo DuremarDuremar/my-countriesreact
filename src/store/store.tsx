@@ -12,7 +12,7 @@ export const setupStore = () => {
         thunk: {
           extraArgument: "",
         },
-      }).concat(logger),
+      }).concat(),
   });
 };
 

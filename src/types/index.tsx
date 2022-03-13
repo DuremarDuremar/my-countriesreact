@@ -46,7 +46,7 @@ export interface IName {
   languages: {
     [propName: string]: string;
   };
-  tld: {
+  tld?: {
     [propName: number]: string;
   };
   borders?: string[];

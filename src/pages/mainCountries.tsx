@@ -24,7 +24,6 @@ const MainCountries: FC = () => {
   const [sortnOption, setSortOption] = useState<IOption | null>(null);
 
   const [value] = useDebounce(search, 1000);
-
   //сортировка массива
   const sortItems = (array: IItem[], sortnOption: IOption | null) => {
     if (sortnOption) {

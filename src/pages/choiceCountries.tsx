@@ -25,8 +25,8 @@ const ChoiceCountries: FC = () => {
 
   const [state, setState] = useState<IName | null>(null);
 
-  console.log(array);
-  console.log(state);
+  // console.log(array);
+  // console.log(state);
 
   // if (array && state) {
   //   let gg = array.filter((item) => {
@@ -47,13 +47,14 @@ const ChoiceCountries: FC = () => {
     }
   }, [data]);
 
+  // поиск название страны по ссылки
   const arrayFilter =
     state &&
     array.filter((item) => {
       return state.borders ? state.borders.includes(item.cca3) : null;
     });
 
-  console.log(arrayFilter);
+  console.log(state);
 
   return (
     <Content>
@@ -85,7 +86,8 @@ const ChoiceCountries: FC = () => {
                       ].common}
                   </li>
                   <li>
-                    <strong>Top Level Domain</strong>: {state && state.tld[0]}
+                    <strong>Top Level Domain</strong>:{" "}
+                    {state.tld && state.tld[0]}
                   </li>
                   <li>
                     <strong>Population</strong>: {state && state.population}
@@ -116,21 +118,13 @@ const ChoiceCountries: FC = () => {
                 <strong>Border Countries</strong>:
               </div>
               <div>
-                {/* {state &&
-                  state.borders.map((item, index) => {
-                    return (
-                      <BorderLink key={index} to={`/${item}`}>
-                        <button>{item}</button>
+                {arrayFilter && arrayFilter.length
+                  ? arrayFilter.map((item, index) => (
+                      <BorderLink key={index} to={`/${item.cca3}`}>
+                        <button>{item.name.common}</button>
                       </BorderLink>
-                    );
-                  })} */}
-                {state &&
-                  arrayFilter &&
-                  arrayFilter.map((item, index) => (
-                    <BorderLink key={index} to={`/${item.cca3}`}>
-                      <button>{item.name.common}</button>
-                    </BorderLink>
-                  ))}
+                    ))
+                  : "..."}
               </div>
             </Borders>
           </Card>

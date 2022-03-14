@@ -12,13 +12,24 @@ export const rotate = (n: any) => keyframes`
   }
 `;
 
-const IdsCss = styled.div<{ top?: boolean; directors?: boolean }>`
-  flex: 1 1 50%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 60vh;
+const IdsCss = styled.div<{ choice?: boolean; all?: boolean }>`
+  ${(props) =>
+    props.choice &&
+    `
+   flex: 1 1 50%;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   height: 60vh;
+    `}
+
+  ${(props) =>
+    !props.choice &&
+    `
+  margin: 0px auto;
+    `}
 `;
+
 const IdsDoubleRing = styled.div`
   position: relative;
   width: 77px !important;
@@ -50,13 +61,13 @@ const IdsDoubleRing = styled.div`
 `;
 
 type SpinnerProps = {
-  top?: boolean;
-  directors?: boolean;
+  choice?: boolean;
+  all?: boolean;
 };
 
-const Spinner: React.FC<SpinnerProps> = () => {
+const Spinner: React.FC<SpinnerProps> = ({ choice, all }) => {
   return (
-    <IdsCss>
+    <IdsCss choice={choice} all={all}>
       <IdsDoubleRing>
         <div></div>
         <div></div>

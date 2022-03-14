@@ -11,7 +11,7 @@ import PaginationCountries from "../components/paginationCountries";
 import ItemCountries from "../components/itemCountries";
 import { Content, Options, Container } from "../styles/mainStyle";
 import { IItem, IOption } from "../types";
-
+import Spinner from "../utils/spinner";
 import { useTypeSelector } from "../hooks/redux";
 
 const MainCountries: FC = () => {
@@ -69,31 +69,47 @@ const MainCountries: FC = () => {
   return (
     <Content>
       <Options>
-        <SearchCountries search={search} setSearch={setSearch} />
-        <RegionCountries
-          regionOption={regionOption}
-          setRegionOption={setRegionOption}
-        />
-        <SortCountries setSortOption={setSortOption} />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <SearchCountries search={search} setSearch={setSearch} />
+        )}
+        {loading ? (
+          <Spinner />
+        ) : (
+          <RegionCountries
+            regionOption={regionOption}
+            setRegionOption={setRegionOption}
+          />
+        )}
+        {loading ? (
+          <Spinner />
+        ) : (
+          <SortCountries setSortOption={setSortOption} />
+        )}
       </Options>
       <Container>
-        {loading
-          ? "loading"
-          : (items.length &&
-              chunk(sortItems(items, sortnOption), 8)[page].map(
-                (item: IItem) => {
-                  return (
-                    <ItemCountries
-                      item={item}
-                      sortnOption={sortnOption}
-                      key={item.name.common}
-                    />
-                  );
-                }
-              )) ||
-            "loading"}
+        {loading ? (
+          <Spinner />
+        ) : (
+          (items.length &&
+            chunk(sortItems(items, sortnOption), 8)[page].map((item: IItem) => {
+              return (
+                <ItemCountries
+                  item={item}
+                  sortnOption={sortnOption}
+                  key={item.name.common}
+                />
+              );
+            })) ||
+          "no"
+        )}
       </Container>
-      <PaginationCountries items={items} setPage={setPage} page={page} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <PaginationCountries items={items} setPage={setPage} page={page} />
+      )}
     </Content>
   );
 };

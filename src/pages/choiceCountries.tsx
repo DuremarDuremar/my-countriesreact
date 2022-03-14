@@ -53,7 +53,7 @@ const ChoiceCountries: FC = () => {
     <Content>
       <>
         {loading ? (
-          <Spinner />
+          <Spinner choice />
         ) : (
           <Flag>
             <Back to={`/`}>
@@ -69,7 +69,7 @@ const ChoiceCountries: FC = () => {
         )}
 
         {loading ? (
-          <Spinner />
+          <Spinner choice />
         ) : (
           <Card>
             <Name>{state && state.name.common}</Name>

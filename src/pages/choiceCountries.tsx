@@ -14,6 +14,7 @@ import {
   BorderLink,
 } from "../styles/choiceStyle";
 import { useTypeSelector } from "../hooks/redux";
+import Spinner from "../utils/spinner";
 import { IName } from "../types";
 
 const ChoiceCountries: FC = () => {
@@ -26,14 +27,6 @@ const ChoiceCountries: FC = () => {
   const [state, setState] = useState<IName | null>(null);
 
   // console.log(array);
-  // console.log(state);
-
-  // if (array && state) {
-  //   let gg = array.filter((item) => {
-  //     return state.borders.includes(item.cca3);
-  //   });
-  //   console.log("gg", gg);
-  // }
 
   const dispatch = useTypeDispatch();
 
@@ -58,10 +51,10 @@ const ChoiceCountries: FC = () => {
 
   return (
     <Content>
-      {loading ? (
-        "Loading"
-      ) : (
-        <>
+      <>
+        {loading ? (
+          <Spinner />
+        ) : (
           <Flag>
             <Back to={`/`}>
               <button>
@@ -73,6 +66,11 @@ const ChoiceCountries: FC = () => {
               {state && <img src={state.flags.png} alt={state.name.common} />}
             </div>
           </Flag>
+        )}
+
+        {loading ? (
+          <Spinner />
+        ) : (
           <Card>
             <Name>{state && state.name.common}</Name>
             <Info>
@@ -128,8 +126,8 @@ const ChoiceCountries: FC = () => {
               </div>
             </Borders>
           </Card>
-        </>
-      )}
+        )}
+      </>
     </Content>
   );
 };

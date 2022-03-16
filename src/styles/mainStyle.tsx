@@ -12,6 +12,20 @@ export const Options = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  @media ${respon.Max729} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    height: 115px;
+    label {
+      grid-column: span 2 / auto;
+      margin: 0px auto;
+    }
+    div {
+      margin: 0px auto;
+    }
+  }
 `;
 
 export const Container = styled.div`
@@ -19,6 +33,9 @@ export const Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   @media ${respon.Max949} {
     grid-template-columns: repeat(3, 1fr);
+  }
+  @media ${respon.Max729} {
+    grid-template-columns: repeat(2, 1fr);
   }
   grid-gap: 15px;
 `;

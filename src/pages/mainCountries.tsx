@@ -3,6 +3,7 @@ import chunk from "chunk";
 import sortBy from "lodash.sortby";
 import { useDebounce } from "use-debounce";
 import { matchSorter } from "match-sorter";
+import { useMediaQuery } from "react-responsive";
 
 import SearchCountries from "../components/searchCountries";
 import RegionCountries from "../components/regionCountries";
@@ -16,6 +17,9 @@ import { useTypeSelector } from "../hooks/redux";
 
 const MainCountries: FC = () => {
   const { data, loading } = useTypeSelector((state) => state.allReducer);
+
+  const res950 = useMediaQuery({ query: "(min-width: 950px)" });
+  const res730 = useMediaQuery({ query: "(min-width: 730px)" });
 
   const [items, setItems] = useState<IItem[]>([]);
   const [page, setPage] = useState<number>(0);
@@ -66,6 +70,8 @@ const MainCountries: FC = () => {
     }
   }, [data, regionOption, value]);
 
+  let res = !res950 && res730 ? 9 : 8;
+
   return (
     <Content>
       <Options>
@@ -93,15 +99,17 @@ const MainCountries: FC = () => {
           <Spinner />
         ) : (
           (items.length &&
-            chunk(sortItems(items, sortnOption), 8)[page].map((item: IItem) => {
-              return (
-                <ItemCountries
-                  item={item}
-                  sortnOption={sortnOption}
-                  key={item.name.common}
-                />
-              );
-            })) ||
+            chunk(sortItems(items, sortnOption), res)[page].map(
+              (item: IItem) => {
+                return (
+                  <ItemCountries
+                    item={item}
+                    sortnOption={sortnOption}
+                    key={item.name.common}
+                  />
+                );
+              }
+            )) ||
           "no"
         )}
       </Container>

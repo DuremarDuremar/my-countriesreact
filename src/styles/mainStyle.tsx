@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { respon } from "../variables";
 
 export const Content = styled.main`
-  /* height: 90vh; */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -17,6 +17,9 @@ export const Options = styled.div`
 export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  @media ${respon.Max949} {
+    grid-template-columns: repeat(3, 1fr);
+  }
   grid-gap: 15px;
 `;
 

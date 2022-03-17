@@ -3,6 +3,7 @@ import React, { FC, useState } from "react";
 import { IItem, IOption } from "../types";
 import { Country, BordersWrapper, LinkWrapper } from "../styles/itemStyle";
 import { useTypeSelector } from "../hooks/redux";
+import { formatSumm } from "../utils";
 
 interface IProps {
   item: IItem;
@@ -70,7 +71,7 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
               ? item.area
               : sortnOption && sortnOption.value === "bordering"
               ? borderLength(item.borders)
-              : item.population}
+              : formatSumm(item.population)}
           </h6>
           {!scan ? (
             <h6 onClick={(e) => e.preventDefault()}>

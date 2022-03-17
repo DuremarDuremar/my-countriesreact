@@ -4,6 +4,7 @@ import sortBy from "lodash.sortby";
 import { useDebounce } from "use-debounce";
 import { matchSorter } from "match-sorter";
 import { useMediaQuery } from "react-responsive";
+import { useInView } from "react-intersection-observer";
 
 import SearchCountries from "../components/searchCountries";
 import RegionCountries from "../components/regionCountries";
@@ -20,14 +21,21 @@ const MainCountries: FC = () => {
 
   const res950 = useMediaQuery({ query: "(min-width: 950px)" });
   const res730 = useMediaQuery({ query: "(min-width: 730px)" });
+  const res520 = useMediaQuery({ query: "(min-width: 520px)" });
 
   const [items, setItems] = useState<IItem[]>([]);
   const [page, setPage] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [regionOption, setRegionOption] = useState<IOption | null>(null);
   const [sortnOption, setSortOption] = useState<IOption | null>(null);
+  const [num, setNum] = useState<number>(!res950 && res730 ? 9 : 8);
 
   const [value] = useDebounce(search, 1000);
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+
   //сортировка массива
   const sortItems = (array: IItem[], sortnOption: IOption | null) => {
     if (sortnOption) {
@@ -72,6 +80,17 @@ const MainCountries: FC = () => {
 
   let res = !res950 && res730 ? 9 : 8;
 
+  useEffect(() => {
+    if (inView) {
+      setNum((prev) => prev + prev);
+    }
+  }, [inView]);
+
+  console.log(num);
+
+  console.log("ref", ref);
+  console.log("inView", inView);
+
   return (
     <Content>
       <Options>
@@ -99,13 +118,14 @@ const MainCountries: FC = () => {
           <Spinner />
         ) : (
           (items.length &&
-            chunk(sortItems(items, sortnOption), res)[page].map(
-              (item: IItem) => {
+            chunk(sortItems(items, sortnOption), num)[page].map(
+              (item: IItem, index: number) => {
                 return (
                   <ItemCountries
                     item={item}
                     sortnOption={sortnOption}
                     key={item.name.common}
+                    // ref={index + 1 === num ? ref : null}
                   />
                 );
               }
@@ -116,7 +136,9 @@ const MainCountries: FC = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <PaginationCountries items={items} setPage={setPage} page={page} />
+        res520 && (
+          <PaginationCountries items={items} setPage={setPage} page={page} />
+        )
       )}
     </Content>
   );

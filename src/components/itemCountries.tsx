@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 import { IItem, IOption } from "../types";
 import { Country, BordersWrapper, LinkWrapper } from "../styles/itemStyle";
@@ -8,9 +9,18 @@ import { formatSumm } from "../utils";
 interface IProps {
   item: IItem;
   sortnOption: IOption | null;
+  index: number;
+  num: number;
+  setNum: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
+const ItemCountries: FC<IProps> = ({
+  item,
+  sortnOption,
+  index,
+  num,
+  setNum,
+}) => {
   const { data } = useTypeSelector((state) => state.allReducer);
 
   const [scan, setScan] = useState(true);
@@ -52,9 +62,22 @@ const ItemCountries: FC<IProps> = ({ item, sortnOption }) => {
     );
   };
 
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      setNum((prev) => prev + prev);
+    }
+  }, [inView]);
+
+  console.log(num);
+  console.log("inView", inView);
+  console.log(index);
   return (
     <LinkWrapper to={`/${item.cca3}`}>
-      <Country key={item.area}>
+      <Country key={item.area} ref={index + 1 === num ? ref : null}>
         <img src={item.flags.svg} alt={item.name.common} />
         <div>
           <h5>{item.name.common}</h5>

@@ -3,6 +3,8 @@ export const respon = {
   smMin: `(min-width: 730px)`,
   mdMin: `(min-width: 950px)`,
   lgMin: `(min-width: 1025px)`,
+  Max439: `(max-width: 439px)`,
+  Max479: `(max-width: 479px)`,
   Max519: `(max-width: 519px)`,
   Max729: `(max-width: 729px)`,
   Max769: `(max-width: 769px)`,

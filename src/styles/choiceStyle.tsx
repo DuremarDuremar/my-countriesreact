@@ -7,6 +7,7 @@ export const Content = styled.div`
   overflow: hidden;
   width: 100%;
   height: calc(100% - 60px);
+  padding: 5px;
   @media ${respon.Max769} {
     display: block;
   }
@@ -76,6 +77,9 @@ export const Card = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media ${respon.Max769} {
+    padding: 15px 5px 0 5px;
+  }
 `;
 
 export const Name = styled.div`
@@ -104,6 +108,12 @@ export const Borders = styled.div`
     padding-left: 10px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    @media ${respon.Max479} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media ${respon.Max439} {
+      grid-template-columns: repeat(2, 1fr);
+    }
     grid-gap: 10px;
     max-width: 440px;
   }

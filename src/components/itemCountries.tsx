@@ -68,13 +68,13 @@ const ItemCountries: FC<IProps> = ({
 
   useEffect(() => {
     if (inView) {
-      setNum((prev) => prev + prev);
+      setNum((prev) => prev + 2);
     }
   }, [inView]);
 
-  console.log(num);
-  console.log("inView", inView);
-  console.log(index);
+  // console.log(num);
+  // console.log("inView", inView);
+  // console.log(index);
   return (
     <LinkWrapper to={`/${item.cca3}`}>
       <Country key={item.area} ref={index + 1 === num ? ref : null}>

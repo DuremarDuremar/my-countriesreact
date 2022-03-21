@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { respon } from "../variables";
 import { Link } from "react-router-dom";
 
 export const Content = styled.div`
@@ -6,6 +7,9 @@ export const Content = styled.div`
   overflow: hidden;
   width: 100%;
   height: calc(100% - 60px);
+  @media ${respon.Max769} {
+    display: block;
+  }
 
   button {
     width: 100%;
@@ -27,9 +31,16 @@ export const Flag = styled.section`
   flex-direction: column;
   display: flex;
   padding: 0 15px 0 4vw;
+  @media ${respon.Max769} {
+    padding: 0;
+  }
 
   div {
     display: flex;
+    @media ${respon.Max769} {
+      display: block;
+      margin: 0px auto;
+    }
   }
   img {
     margin-top: 10%;
@@ -38,6 +49,7 @@ export const Flag = styled.section`
       rgba(0, 0, 0, 0.05) 25px 25px;
     display: block;
     max-width: 460px;
+    min-width: 260px;
     max-height: 320px;
     width: 100%;
   }
@@ -47,6 +59,10 @@ export const Back = styled(Link)`
   width: 90px;
   height: 30px;
   margin-top: 10%;
+  @media ${respon.Max769} {
+    margin-left: 5px;
+    margin-top: 5px;
+  }
 
   span {
     font-size: 11px;

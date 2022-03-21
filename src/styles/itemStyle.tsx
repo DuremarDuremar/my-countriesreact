@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Country = styled.article`
-  width: 208px;
+  max-width: 208px;
   cursor: pointer;
   margin: 0px auto;
   position: relative;

@@ -5,6 +5,7 @@ export const Content = styled.main`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 0 5px;
 `;
 
 export const Options = styled.div`

@@ -4,6 +4,7 @@ import sortBy from "lodash.sortby";
 import { useDebounce } from "use-debounce";
 import { matchSorter } from "match-sorter";
 import { useMediaQuery } from "react-responsive";
+import { useErrorBoundary } from "use-error-boundary";
 
 import SearchCountries from "../components/searchCountries";
 import RegionCountries from "../components/regionCountries";
@@ -30,6 +31,7 @@ const MainCountries: FC = () => {
   const [num, setNum] = useState<number>(8);
 
   const [value] = useDebounce(search, 1000);
+  const { ErrorBoundary } = useErrorBoundary();
 
   //сортировка массива
   const sortItems = (array: IItem[], sortnOption: IOption | null) => {
@@ -83,20 +85,39 @@ const MainCountries: FC = () => {
         {loading ? (
           <Spinner />
         ) : (
-          <SearchCountries search={search} setSearch={setSearch} />
-        )}
-        {loading ? (
-          <Spinner />
-        ) : (
-          <RegionCountries
-            regionOption={regionOption}
-            setRegionOption={setRegionOption}
+          <ErrorBoundary
+            render={() => (
+              <SearchCountries search={search} setSearch={setSearch} />
+            )}
+            renderError={({ error }) => (
+              <p>An error has been caught: {error.message}</p>
+            )}
           />
         )}
         {loading ? (
           <Spinner />
         ) : (
-          <SortCountries setSortOption={setSortOption} />
+          <ErrorBoundary
+            render={() => (
+              <RegionCountries
+                regionOption={regionOption}
+                setRegionOption={setRegionOption}
+              />
+            )}
+            renderError={({ error }) => (
+              <p>An error has been caught: {error.message}</p>
+            )}
+          />
+        )}
+        {loading ? (
+          <Spinner />
+        ) : (
+          <ErrorBoundary
+            render={() => <SortCountries setSortOption={setSortOption} />}
+            renderError={({ error }) => (
+              <p>An error has been caught: {error.message}</p>
+            )}
+          />
         )}
       </Options>
       <Container>
@@ -107,13 +128,20 @@ const MainCountries: FC = () => {
             chunk(sortItems(items, sortnOption), res520 ? res : num)[page].map(
               (item: IItem, index: number) => {
                 return (
-                  <ItemCountries
-                    item={item}
-                    sortnOption={sortnOption}
+                  <ErrorBoundary
                     key={item.name.common}
-                    index={index}
-                    num={num}
-                    setNum={setNum}
+                    render={() => (
+                      <ItemCountries
+                        item={item}
+                        sortnOption={sortnOption}
+                        index={index}
+                        num={num}
+                        setNum={setNum}
+                      />
+                    )}
+                    renderError={({ error }) => (
+                      <p>An error has been caught: {error.message}</p>
+                    )}
                   />
                 );
               }
@@ -125,7 +153,18 @@ const MainCountries: FC = () => {
         <Spinner />
       ) : (
         res520 && (
-          <PaginationCountries items={items} setPage={setPage} page={page} />
+          <ErrorBoundary
+            render={() => (
+              <PaginationCountries
+                items={items}
+                setPage={setPage}
+                page={page}
+              />
+            )}
+            renderError={({ error }) => (
+              <p>An error has been caught: {error.message}</p>
+            )}
+          />
         )
       )}
     </Content>

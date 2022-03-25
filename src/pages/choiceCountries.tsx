@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useErrorBoundary } from "use-error-boundary";
 
 import { fetchName } from "../store/actions";
 import { useTypeDispatch } from "../hooks/redux";
@@ -29,6 +30,7 @@ const ChoiceCountries: FC = () => {
   // console.log(array);
 
   const dispatch = useTypeDispatch();
+  const { ErrorBoundary } = useErrorBoundary();
 
   useEffect(() => {
     dispatch(fetchName(id));
@@ -47,7 +49,81 @@ const ChoiceCountries: FC = () => {
       return state.borders ? state.borders.includes(item.cca3) : null;
     });
 
-  console.log(state);
+  // console.log(state);
+
+  const renderFlag = () => {
+    return (
+      <Flag>
+        <Back to={`/`}>
+          <button>
+            <i className="fas fa-long-arrow-alt-left"></i>
+            <span> Back</span>
+          </button>
+        </Back>
+        <div>
+          {state && <img src={state.flags.png} alt={state.name.common} />}
+        </div>
+      </Flag>
+    );
+  };
+
+  const renderCard = () => {
+    return (
+      <Card>
+        <Name>{state && state.name.common}</Name>
+        <Info>
+          {state && (
+            <>
+              <li>
+                <strong>Native Name</strong>:{" "}
+                {state &&
+                  state.name.nativeName[Object.keys(state.name.nativeName)[0]]
+                    .common}
+              </li>
+              <li>
+                <strong>Top Level Domain</strong>: {state.tld && state.tld[0]}
+              </li>
+              <li>
+                <strong>Population</strong>: {state && state.population}
+              </li>
+              <li>
+                <strong>Currencies</strong>:{" "}
+                {state &&
+                  state.currencies[Object.keys(state.currencies)[0]].name}
+              </li>
+              <li>
+                <strong>Region</strong>: {state && state.region}
+              </li>
+              <li>
+                <strong>Languages</strong>:{" "}
+                {state && Object.values(state.languages)[0]}
+              </li>
+              <li>
+                <strong>Sub Region</strong>: {state && state.subregion}
+              </li>
+              <li>
+                <strong>Capital</strong> {state && state.capital}
+              </li>
+            </>
+          )}
+        </Info>
+        <Borders>
+          <div>
+            <strong>Border Countries</strong>:
+          </div>
+          <div>
+            {arrayFilter && arrayFilter.length
+              ? arrayFilter.map((item, index) => (
+                  <BorderLink key={index} to={`/${item.cca3}`}>
+                    <button>{item.name.common}</button>
+                  </BorderLink>
+                ))
+              : "..."}
+          </div>
+        </Borders>
+      </Card>
+    );
+  };
 
   return (
     <Content>
@@ -55,77 +131,23 @@ const ChoiceCountries: FC = () => {
         {loading ? (
           <Spinner choice />
         ) : (
-          <Flag>
-            <Back to={`/`}>
-              <button>
-                <i className="fas fa-long-arrow-alt-left"></i>
-                <span> Back</span>
-              </button>
-            </Back>
-            <div>
-              {state && <img src={state.flags.png} alt={state.name.common} />}
-            </div>
-          </Flag>
+          <ErrorBoundary
+            render={() => renderFlag()}
+            renderError={({ error }) => (
+              <p>An error has been caught: {error.message}</p>
+            )}
+          />
         )}
 
         {loading ? (
           <Spinner choice />
         ) : (
-          <Card>
-            <Name>{state && state.name.common}</Name>
-            <Info>
-              {state && (
-                <>
-                  <li>
-                    <strong>Native Name</strong>:{" "}
-                    {state &&
-                      state.name.nativeName[
-                        Object.keys(state.name.nativeName)[0]
-                      ].common}
-                  </li>
-                  <li>
-                    <strong>Top Level Domain</strong>:{" "}
-                    {state.tld && state.tld[0]}
-                  </li>
-                  <li>
-                    <strong>Population</strong>: {state && state.population}
-                  </li>
-                  <li>
-                    <strong>Currencies</strong>:{" "}
-                    {state &&
-                      state.currencies[Object.keys(state.currencies)[0]].name}
-                  </li>
-                  <li>
-                    <strong>Region</strong>: {state && state.region}
-                  </li>
-                  <li>
-                    <strong>Languages</strong>:{" "}
-                    {state && Object.values(state.languages)[0]}
-                  </li>
-                  <li>
-                    <strong>Sub Region</strong>: {state && state.subregion}
-                  </li>
-                  <li>
-                    <strong>Capital</strong> {state && state.capital}
-                  </li>
-                </>
-              )}
-            </Info>
-            <Borders>
-              <div>
-                <strong>Border Countries</strong>:
-              </div>
-              <div>
-                {arrayFilter && arrayFilter.length
-                  ? arrayFilter.map((item, index) => (
-                      <BorderLink key={index} to={`/${item.cca3}`}>
-                        <button>{item.name.common}</button>
-                      </BorderLink>
-                    ))
-                  : "..."}
-              </div>
-            </Borders>
-          </Card>
+          <ErrorBoundary
+            render={() => renderCard()}
+            renderError={({ error }) => (
+              <p>An error has been caught: {error.message}</p>
+            )}
+          />
         )}
       </>
     </Content>

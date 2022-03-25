@@ -1,8 +1,4 @@
 export const respon = {
-  xsMin: `(min-width: 520px)`,
-  smMin: `(min-width: 730px)`,
-  mdMin: `(min-width: 950px)`,
-  lgMin: `(min-width: 1025px)`,
   Max439: `(max-width: 439px)`,
   Max479: `(max-width: 479px)`,
   Max519: `(max-width: 519px)`,

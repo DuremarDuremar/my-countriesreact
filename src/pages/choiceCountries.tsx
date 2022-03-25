@@ -51,7 +51,7 @@ const ChoiceCountries: FC = () => {
 
   // console.log(state);
 
-  const renderFlag = () => {
+  const RenderFlag = () => {
     return (
       <Flag>
         <Back to={`/`}>
@@ -67,7 +67,7 @@ const ChoiceCountries: FC = () => {
     );
   };
 
-  const renderCard = () => {
+  const RenderCard = () => {
     return (
       <Card>
         <Name>{state && state.name.common}</Name>
@@ -132,7 +132,7 @@ const ChoiceCountries: FC = () => {
           <Spinner choice />
         ) : (
           <ErrorBoundary
-            render={() => renderFlag()}
+            render={() => <RenderFlag />}
             renderError={({ error }) => (
               <p>An error has been caught: {error.message}</p>
             )}
@@ -143,7 +143,7 @@ const ChoiceCountries: FC = () => {
           <Spinner choice />
         ) : (
           <ErrorBoundary
-            render={() => renderCard()}
+            render={() => <RenderCard />}
             renderError={({ error }) => (
               <p>An error has been caught: {error.message}</p>
             )}

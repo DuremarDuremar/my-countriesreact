@@ -10,8 +10,15 @@ const renderWithRedux = (component: any, {} = {}) => {
   };
 };
 
-test("renders learn react link", () => {
+test("renders text", () => {
   renderWithRedux(<App />);
 
   expect(screen.getByText("Where in the world?")).toBeInTheDocument();
+  // expect(screen.queryByText("Sort by")).toBeNull();
+});
+
+test("renders text2", async () => {
+  renderWithRedux(<App />);
+
+  expect(await screen.findByText("Afghanistan")).toBeInTheDocument();
 });

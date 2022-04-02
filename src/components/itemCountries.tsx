@@ -70,7 +70,7 @@ const ItemCountries: FC<IProps> = ({
     if (inView) {
       setNum((prev) => prev + 2);
     }
-  }, [inView]);
+  }, [inView, setNum]);
 
   // console.log(num);
   // console.log("inView", inView);

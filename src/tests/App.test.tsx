@@ -1,5 +1,4 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { setupStore } from "../store/store";
 import App from "../App";
@@ -21,4 +20,17 @@ test("renders text2", async () => {
   renderWithRedux(<App />);
 
   expect(await screen.findByText("Afghanistan")).toBeInTheDocument();
+});
+
+test("btn", async () => {
+  renderWithRedux(<App />);
+
+  const btn = await screen.findByTestId("Afghanistan");
+
+  expect(screen.queryByTestId("card")).toBeNull();
+  fireEvent.click(btn);
+  expect(screen.getByTestId("card")).toBeInTheDocument();
+  // expect(screen.queryByTestId("stan")).toBeNull();
+
+  // const btn = screen.getAllByTestId("btn0");
 });

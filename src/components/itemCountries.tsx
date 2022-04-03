@@ -79,7 +79,7 @@ const ItemCountries: FC<IProps> = ({
     <LinkWrapper to={`/${item.cca3}`}>
       <Country key={item.area} ref={index + 1 === num ? ref : null}>
         <img src={item.flags.svg} alt={item.name.common} />
-        <div>
+        <div data-testid={item.name.common}>
           <h5>{item.name.common}</h5>
           <h6>
             <strong>

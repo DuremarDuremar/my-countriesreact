@@ -126,7 +126,7 @@ const ChoiceCountries: FC = () => {
   };
 
   return (
-    <Content>
+    <Content data-testid="card">
       <>
         {loading ? (
           <Spinner choice />

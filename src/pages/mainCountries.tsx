@@ -80,7 +80,7 @@ const MainCountries: FC = () => {
   // console.log("ref", ref);
 
   return (
-    <Content>
+    <Content data-testid="main">
       <Options>
         {loading ? (
           <Spinner />

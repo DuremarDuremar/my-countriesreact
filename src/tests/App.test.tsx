@@ -13,14 +13,13 @@ test("renders text", () => {
   renderWithRedux(<App />);
 
   expect(screen.getByText("Where in the world?")).toBeInTheDocument();
-  // expect(screen.queryByText("Sort by")).toBeNull();
 });
 
-test("renders text2", async () => {
-  renderWithRedux(<App />);
+// test("renders text2", async () => {
+//   renderWithRedux(<App />);
 
-  expect(await screen.findByText("Afghanistan")).toBeInTheDocument();
-});
+//   expect(await screen.findByText("Afghanistan")).toBeInTheDocument();
+// });
 
 test("btn", async () => {
   renderWithRedux(<App />);
@@ -30,7 +29,7 @@ test("btn", async () => {
   expect(screen.queryByTestId("card")).toBeNull();
   fireEvent.click(btn);
   expect(screen.getByTestId("card")).toBeInTheDocument();
-  // expect(screen.queryByTestId("stan")).toBeNull();
+  expect(screen.queryByTestId("main")).toBeNull();
 
   // const btn = screen.getAllByTestId("btn0");
 });

@@ -6,3 +6,4 @@
 </span>
 
 <img src="dec1.png" width=660 height=330>
+<img src="dec2.png" width=660 height=330>

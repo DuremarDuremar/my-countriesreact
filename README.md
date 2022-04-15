@@ -1,8 +1,8 @@
 [сайт](https://duremarduremar.github.io/my-countriesreact/) <br/>
 
 <span>
-<img src="adap1.jpeg.jpg" width=330 height=560>
-<img src="adap2.jpeg.jpg" width=330 height=560>
+<img src="adap1.jpg" width=330 height=560>
+<img src="adap2.jpg" width=330 height=560>
 </span>
 
-<img src="dec1.png.png" width=660 height=330>
+<img src="dec1.png" width=660 height=330>

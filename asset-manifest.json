@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/my-countriesreact/static/js/main.c17740e6.js",
+    "static/js/787.c932cc7d.chunk.js": "/my-countriesreact/static/js/787.c932cc7d.chunk.js",
+    "index.html": "/my-countriesreact/index.html",
+    "main.c17740e6.js.map": "/my-countriesreact/static/js/main.c17740e6.js.map",
+    "787.c932cc7d.chunk.js.map": "/my-countriesreact/static/js/787.c932cc7d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.c17740e6.js"
+  ]
+}
